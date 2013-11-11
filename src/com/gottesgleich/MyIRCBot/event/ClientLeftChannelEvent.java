@@ -9,13 +9,15 @@ public class ClientLeftChannelEvent extends IRCEvent
 	
 	private IRCClient client;
 	private String channel;
+	private String hostmask;
 	
 	
-	public ClientLeftChannelEvent(IRCConnection con, IRCClient client, String channel)
+	public ClientLeftChannelEvent(IRCConnection con, IRCClient client, String channel, String hostmask)
 	{
 		super(con);
 		this.client = client;
 		this.channel = channel;
+		this.hostmask = hostmask;
 	}
 	
 	public IRCClient getClient()
@@ -26,5 +28,10 @@ public class ClientLeftChannelEvent extends IRCEvent
 	public String getChannel()
 	{
 		return this.channel;
+	}
+	
+	public String getHostmask()
+	{
+		return this.hostmask;
 	}
 }

@@ -8,12 +8,14 @@ public class ClientMessageToBotEvent extends IRCEvent
 	
 	private String clientname;
 	private String msg;
+	private String hostmask;
 	
-	public ClientMessageToBotEvent(IRCConnection con, String clientname, String msg) 
+	public ClientMessageToBotEvent(IRCConnection con, String clientname, String msg, String hostmask) 
 	{
 		super(con);
 		this.clientname = clientname;
 		this.msg = msg;
+		this.hostmask = hostmask;
 	}
 	
 	public String getMessage()
@@ -24,5 +26,10 @@ public class ClientMessageToBotEvent extends IRCEvent
 	public String getClientName()
 	{
 		return this.clientname;
+	}
+	
+	public String getHostmask()
+	{
+		return this.hostmask;
 	}
 }

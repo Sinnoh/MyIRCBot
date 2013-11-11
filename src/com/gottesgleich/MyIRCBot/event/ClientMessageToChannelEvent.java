@@ -11,13 +11,15 @@ public class ClientMessageToChannelEvent extends IRCEvent
 	private IRCChannel channel;
 	private IRCClient client;
 	private String msg;
+	private String hostmask;
 	
-	public ClientMessageToChannelEvent(IRCConnection con, IRCClient client, String msg, IRCChannel channel)
+	public ClientMessageToChannelEvent(IRCConnection con, IRCClient client, String msg, IRCChannel channel, String hostmask)
 	{
 		super(con);
 		this.channel = channel;
 		this.client = client;
 		this.msg = msg;
+		this.hostmask = hostmask;
 	}
 	
 	public String getMessage()
@@ -33,6 +35,11 @@ public class ClientMessageToChannelEvent extends IRCEvent
 	public IRCChannel getChannel()
 	{
 		return this.channel;
+	}
+	
+	public String getHostmask()
+	{
+		return this.hostmask;
 	}
 	
 }

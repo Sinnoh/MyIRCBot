@@ -65,7 +65,7 @@ public class IRCInputDumper extends Thread
 			    				  IRCChannel ch = this.con.getChannel(value);
 			    				  ch.updateClientList();
 			    				  MyIRCBot.log(sender + " (" + senderhost + ") " + "joined " + value);
-			    				  MyIRCBot.getEventManager().callEvent(new ClientJoinedChannelEvent(con, ch.getClient(sender), ch));
+			    				  MyIRCBot.getEventManager().callEvent(new ClientJoinedChannelEvent(con, ch.getClient(sender), ch, senderhost));
 			    			  }
 			    		  }
 			    		  else if(action.equalsIgnoreCase("PART"))//Client left channel
@@ -81,7 +81,7 @@ public class IRCInputDumper extends Thread
 			    			  {
 			    				  ch.updateClientList();
 			    				  MyIRCBot.log(sender + " (" + senderhost + ") " + "left " + value);
-			    				  MyIRCBot.getEventManager().callEvent(new ClientLeftChannelEvent(con, ch.getClient(sender), value));
+			    				  MyIRCBot.getEventManager().callEvent(new ClientLeftChannelEvent(con, ch.getClient(sender), value, senderhost));
 			    			  }
 			    		  }
 			    		  else if(action.equalsIgnoreCase("QUIT"))
@@ -125,12 +125,12 @@ public class IRCInputDumper extends Thread
 			    			  if(value.startsWith("#"))//Message to channel
 			    			  {
 			    				  IRCChannel ch = this.con.getChannel(value);
-			    				  MyIRCBot.getEventManager().callEvent(new ClientMessageToChannelEvent(con, ch.getClient(sender), msg, ch));
+			    				  MyIRCBot.getEventManager().callEvent(new ClientMessageToChannelEvent(con, ch.getClient(sender), msg, ch, senderhost));
 			    				  MyIRCBot.log(value + " " + sender + ": " + msg);
 			    			  }
 			    			  else if(value.equalsIgnoreCase(con.getUserName()))//Message to bot
 			    			  {
-			    				  MyIRCBot.getEventManager().callEvent(new ClientMessageToBotEvent(con, sender, msg));
+			    				  MyIRCBot.getEventManager().callEvent(new ClientMessageToBotEvent(con, sender, msg, senderhost));
 			    				  MyIRCBot.log(sender + " -> " + con.getUserName() + " : " + msg);
 			    			  }
 			    		  }
