@@ -17,9 +17,9 @@ public class StopCommand extends IRCCommand
 	{
 		try
 		{
-			  MyIRCBot.getPluginLoader().disablePlugins();
-			  getConnection().exit();
-			  MyIRCBot.exit();	
+			MyIRCBot.getPluginLoader().disablePlugins();
+			getConnection().exit();
+			MyIRCBot.exit();	
 		}catch(Exception e)
 		{
 			MyIRCBot.logError(e);

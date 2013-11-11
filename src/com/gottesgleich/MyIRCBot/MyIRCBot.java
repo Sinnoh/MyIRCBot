@@ -16,6 +16,7 @@ import java.util.Date;
 
 
 
+
 import com.gottesgleich.MyIRCBot.commands.DebugCommand;
 import com.gottesgleich.MyIRCBot.commands.JoinCommand;
 import com.gottesgleich.MyIRCBot.commands.ReloadCommand;
@@ -36,6 +37,7 @@ public class MyIRCBot
 	private static File logfile;
 	private static FileWriter logwriter;
 	private static IRCCommandManager cmdmanager;
+	private static UserInputDumper ui;
 	
 	public static void main(String[] args) throws IOException
 	{
@@ -53,7 +55,7 @@ public class MyIRCBot
 			IRCConnection con = new IRCConnection(config.getString("host"), config.getString("nick"), config.getInt("port"));
 			setupCommands(con);
 			con.joinChannel("Sinnoh");
-			UserInputDumper ui = new UserInputDumper(con);
+			ui = new UserInputDumper(con);
 			ui.start();
 		}catch (Exception e) 
 		{	
@@ -125,6 +127,7 @@ public class MyIRCBot
 		{
 			logError(e);
 		}
+		ui.setRunning(false);
 		System.exit(0);
 	}
 	
@@ -167,6 +170,11 @@ public class MyIRCBot
 	public static void setDebug(boolean b)
 	{
 		debug = b;
+	}
+	
+	public static UserInputDumper getUserInputDumper()
+	{
+		return ui;
 	}
 	
 	

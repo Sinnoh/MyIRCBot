@@ -79,9 +79,9 @@ public class IRCConnection
 	  
 	  public void exit() throws IOException
 	  {
-		  for(IRCChannel ch : this.channels)
+		  for(int i = 0; i< this.channels.size(); i++)
 		  {
-			  ch.leave();
+			  this.channels.get(i).leave();
 		  }
 		  this.out.setRunning(false);
 		  this.in.setRunning(false);
