@@ -55,17 +55,12 @@ public class MyIRCBot
 			IRCConnection con = new IRCConnection(config.getString("host"), config.getString("nick"), config.getInt("port"));
 			setupCommands(con);
 			con.joinChannel("Sinnoh");
-			ui = new UserInputDumper(con);
+			MyIRCBot.ui = new UserInputDumper(con);
 			ui.start();
 		}catch (Exception e) 
 		{	
 			logError(e);
 		}
-	}
-	
-	public static PluginLoader getPluginLoader()
-	{
-		return MyIRCBot.pluginloader;
 	}
 	
 	public static void setupCommands(IRCConnection con)
@@ -111,6 +106,11 @@ public class MyIRCBot
 	public static IRCCommandManager getCommandManager()
 	{
 		return MyIRCBot.cmdmanager;
+	}
+	
+	public static PluginLoader getPluginLoader()
+	{
+		return MyIRCBot.pluginloader;
 	}
 	
 	public static FileConfiguration getConfig()
@@ -171,13 +171,6 @@ public class MyIRCBot
 	{
 		debug = b;
 	}
-	
-	public static UserInputDumper getUserInputDumper()
-	{
-		return ui;
-	}
-	
-	
 }
 
 

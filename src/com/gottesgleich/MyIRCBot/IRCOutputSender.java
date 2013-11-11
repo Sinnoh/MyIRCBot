@@ -39,7 +39,7 @@ public class IRCOutputSender extends Thread
 			{
 				if(this.nextping < System.currentTimeMillis())//Check if the server is still alive
 				{
-					this.nextping = System.currentTimeMillis() + 10000;
+				    this.nextping = System.currentTimeMillis() + 10000;
 					MyIRCBot.log("Checking, if server is alive", true);
 					MyIRCBot.log("OUT: PING " + con.getHost(), true);
 					this.bw.write("PING " + con.getHost() + "\n\r");
