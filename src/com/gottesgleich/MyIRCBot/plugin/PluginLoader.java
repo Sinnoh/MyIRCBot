@@ -16,43 +16,6 @@ public class PluginLoader
 	
 	private List<IRCPlugin> plugins = new ArrayList<IRCPlugin>();
 	
-	public void loadScripts()
-	{
-		File directory = new File("scripts");
-		if(!directory.exists())
-		{
-			directory.mkdir();
-		}
-		if(!directory.isDirectory())
-		{
-			return;
-		}
-		for(File f : directory.listFiles())
-		{
-			if(!f.getName().endsWith(".class"))
-			{
-				continue;
-			}
-			try
-			{
-				@SuppressWarnings("resource")
-				ClassLoader loader = new URLClassLoader(new URL[] {f.toURI().toURL()}, MyIRCBot.class.getClassLoader());
-				String name = f.getName().substring(0,f.getName().lastIndexOf("."));
-				Class<?> clazz = loader.loadClass(name);
-				Object o = clazz.newInstance();
-				if(o instanceof IRCEventListener)
-				{
-					MyIRCBot.log("Registered " + name + ".class as IRCListener");
-					MyIRCBot.getEventManager().registerListener((IRCEventListener) o);
-				}
-			}catch(Exception e)
-			{
-				MyIRCBot.logError(e);
-			}
-			
-		}
-	}
-	
 	public void loadPlugins()
 	{
 		File directory = new File("plugins");

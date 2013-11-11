@@ -19,7 +19,6 @@ public class ReloadCommand extends IRCCommand
 		{
 			MyIRCBot.getEventManager().unregisterListeners();
 			MyIRCBot.getPluginLoader().disablePlugins();
-			MyIRCBot.getPluginLoader().loadScripts();
 			MyIRCBot.getPluginLoader().loadPlugins();
 			MyIRCBot.getPluginLoader().enablePlugins();
 			MyIRCBot.getConfig().reloadConfig();

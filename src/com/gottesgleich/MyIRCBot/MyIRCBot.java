@@ -48,7 +48,6 @@ public class MyIRCBot
         	debug = config.getBoolean("debug");
         	pluginloader = new PluginLoader();
         	eventmng = new IRCEventManager();
-        	pluginloader.loadScripts();
         	pluginloader.loadPlugins();
         	pluginloader.enablePlugins();
     		MyIRCBot.log("Starting MyIRCBot v.1.0");
