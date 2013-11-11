@@ -30,6 +30,7 @@ import com.gottesgleich.MyIRCBot.plugin.PluginLoader;
 
 public class MyIRCBot 
 {
+	private static String version = "1.1";
 	private static IRCEventManager eventmng;
 	private static PluginLoader pluginloader;
 	private static boolean debug;
@@ -50,7 +51,7 @@ public class MyIRCBot
         	eventmng = new IRCEventManager();
         	pluginloader.loadPlugins();
         	pluginloader.enablePlugins();
-    		MyIRCBot.log("Starting MyIRCBot v.1.0");
+    		MyIRCBot.log("Starting MyIRCBot v." + version);
 			IRCConnection con = new IRCConnection(config.getString("host"), config.getString("nick"), config.getInt("port"));
 			setupCommands(con);
 			con.joinChannel("Sinnoh");
@@ -79,18 +80,18 @@ public class MyIRCBot
 	private static void loadConfig()
 	{
 		config = new FileConfiguration(new File("config.properties"));
-		config.addDefaults("host", "nl.quakenet.org");
-		config.addDefaults("nick", "MyBot");
+		config.addDefaults("host", "portlane.se.quakenet.org");
+		config.addDefaults("nick", "GBot");
 		config.addDefaults("port", 6669);
 		config.addDefaults("debug", false);
-		config.save("MyIRCBot by Sinnoh");
+		config.save("MyIRCBot v." + version + " by Sinnoh");
 	}
 	
 	private static void setUpLogFile()
 	{
 		try
 		{
-			logfile = new File("MyIrcBot.log");
+			logfile = new File("myircbot.log");
 			if(!logfile.exists())
 			{
 				logfile.createNewFile();
