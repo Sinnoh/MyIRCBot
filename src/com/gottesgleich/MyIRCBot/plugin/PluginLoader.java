@@ -9,7 +9,6 @@ import java.util.Properties;
 
 import com.gottesgleich.MyIRCBot.MyIRCBot;
 import com.gottesgleich.MyIRCBot.configuration.FileConfiguration;
-import com.gottesgleich.MyIRCBot.event.api.IRCEventListener;
 
 public class PluginLoader 
 {
