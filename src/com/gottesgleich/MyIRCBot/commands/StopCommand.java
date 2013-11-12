@@ -38,7 +38,8 @@ public class StopCommand extends IRCCommand
 			MyIRCBot.getPluginLoader().disablePlugins();
 			getConnection().exit();
 			MyIRCBot.exit();
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			MyIRCBot.logError(e);
 		}

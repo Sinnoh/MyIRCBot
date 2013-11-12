@@ -37,11 +37,12 @@ public class FileConfiguration
 		{
 			this.file = f;
 			this.prop = new Properties();
-			if (f.exists())
+			if(f.exists())
 			{
 				this.prop.load(new FileReader(this.file));
 			}
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -49,7 +50,7 @@ public class FileConfiguration
 
 	public void addDefaults(String path, String value)
 	{
-		if (this.prop.getProperty(path) == null)
+		if(this.prop.getProperty(path) == null)
 		{
 			this.prop.put(path, value);
 		}
@@ -57,7 +58,7 @@ public class FileConfiguration
 
 	public void addDefaults(String path, Integer value)
 	{
-		if (this.prop.getProperty(path) == null)
+		if(this.prop.getProperty(path) == null)
 		{
 			this.prop.put(path, String.valueOf(value));
 		}
@@ -65,7 +66,7 @@ public class FileConfiguration
 
 	public void addDefaults(String path, Double value)
 	{
-		if (this.prop.getProperty(path) == null)
+		if(this.prop.getProperty(path) == null)
 		{
 			this.prop.put(path, String.valueOf(value));
 		}
@@ -73,7 +74,7 @@ public class FileConfiguration
 
 	public void addDefaults(String path, Long value)
 	{
-		if (this.prop.getProperty(path) == null)
+		if(this.prop.getProperty(path) == null)
 		{
 			this.prop.put(path, String.valueOf(value));
 		}
@@ -81,7 +82,7 @@ public class FileConfiguration
 
 	public void addDefaults(String path, Boolean value)
 	{
-		if (this.prop.getProperty(path) == null)
+		if(this.prop.getProperty(path) == null)
 		{
 			this.prop.put(path, String.valueOf(value));
 		}
@@ -91,7 +92,7 @@ public class FileConfiguration
 	{
 		try
 		{
-			if (!this.file.exists())
+			if(!this.file.exists())
 			{
 				this.file.getParentFile().mkdirs();
 				this.file.createNewFile();
@@ -99,7 +100,8 @@ public class FileConfiguration
 			FileWriter fw = new FileWriter(this.file);
 			this.prop.store(fw, p.getName());
 			fw.close();
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -109,7 +111,7 @@ public class FileConfiguration
 	{
 		try
 		{
-			if (!this.file.exists())
+			if(!this.file.exists())
 			{
 				// this.file.getParentFile().mkdirs();
 				this.file.createNewFile();
@@ -117,7 +119,8 @@ public class FileConfiguration
 			FileWriter fw = new FileWriter(this.file);
 			this.prop.store(fw, name);
 			fw.close();
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -150,10 +153,11 @@ public class FileConfiguration
 
 	public String getString(String path)
 	{
-		if (this.prop.getProperty(path) == null)
+		if(this.prop.getProperty(path) == null)
 		{
 			return null;
-		} else
+		}
+		else
 		{
 			return this.prop.getProperty(path);
 		}
@@ -161,15 +165,17 @@ public class FileConfiguration
 
 	public Integer getInt(String path)
 	{
-		if (this.prop.getProperty(path) == null)
+		if(this.prop.getProperty(path) == null)
 		{
 			return null;
-		} else
+		}
+		else
 		{
 			try
 			{
 				return Integer.valueOf(this.prop.getProperty(path));
-			} catch (Exception e)
+			}
+			catch(Exception e)
 			{
 				return null;
 			}
@@ -178,15 +184,17 @@ public class FileConfiguration
 
 	public Double getDouble(String path)
 	{
-		if (this.prop.getProperty(path) == null)
+		if(this.prop.getProperty(path) == null)
 		{
 			return null;
-		} else
+		}
+		else
 		{
 			try
 			{
 				return Double.valueOf(this.prop.getProperty(path));
-			} catch (Exception e)
+			}
+			catch(Exception e)
 			{
 				return null;
 			}
@@ -195,15 +203,17 @@ public class FileConfiguration
 
 	public Long getLong(String path)
 	{
-		if (this.prop.getProperty(path) == null)
+		if(this.prop.getProperty(path) == null)
 		{
 			return null;
-		} else
+		}
+		else
 		{
 			try
 			{
 				return Long.valueOf(this.prop.getProperty(path));
-			} catch (Exception e)
+			}
+			catch(Exception e)
 			{
 				return null;
 			}
@@ -212,15 +222,17 @@ public class FileConfiguration
 
 	public Boolean getBoolean(String path)
 	{
-		if (this.prop.getProperty(path) == null)
+		if(this.prop.getProperty(path) == null)
 		{
 			return null;
-		} else
+		}
+		else
 		{
 			try
 			{
 				return Boolean.valueOf(this.prop.getProperty(path));
-			} catch (Exception e)
+			}
+			catch(Exception e)
 			{
 				return null;
 			}
@@ -233,7 +245,8 @@ public class FileConfiguration
 		{
 			this.prop = new Properties();
 			this.prop.load(new FileReader(this.file));
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}

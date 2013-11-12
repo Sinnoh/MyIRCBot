@@ -51,11 +51,11 @@ public class IRCOutputSender extends Thread
 	@Override
 	public void run()
 	{
-		while (running)
+		while(running)
 		{
 			try
 			{
-				if (this.nextping < System.currentTimeMillis())// Check if the
+				if(this.nextping < System.currentTimeMillis())// Check if the
 																// server is
 																// still alive
 				{
@@ -65,18 +65,19 @@ public class IRCOutputSender extends Thread
 					this.bw.write("PING " + con.getHost() + "\n\r");
 					this.bw.flush();
 				}
-				if (this.important.size() != 0)
+				if(this.important.size() != 0)
 				{
 					IRCProtocol p = this.important.get(0);
 					this.bw.write(p.parse());
 					this.bw.flush();
 					MyIRCBot.log("OUT: " + p.parse().replace("\r", ""), true);
 					this.important.remove(0);
-				} else if (this.msgs.size() != 0)
+				}
+				else if(this.msgs.size() != 0)
 				{
-					if (con.isConnected())
+					if(con.isConnected())
 					{
-						if (this.msgs.size() == 0)
+						if(this.msgs.size() == 0)
 						{
 							continue;
 						}
@@ -87,7 +88,8 @@ public class IRCOutputSender extends Thread
 						this.msgs.remove(0);
 					}
 				}
-			} catch (Exception e)
+			}
+			catch(Exception e)
 			{
 				MyIRCBot.log("Connection lost");
 				con.reconnect(Long.valueOf(10));
@@ -102,10 +104,11 @@ public class IRCOutputSender extends Thread
 
 	public void addMessage(IRCProtocol pro, Boolean b)
 	{
-		if (b)
+		if(b)
 		{
 			this.important.add(pro);
-		} else
+		}
+		else
 		{
 			this.msgs.add(pro);
 		}

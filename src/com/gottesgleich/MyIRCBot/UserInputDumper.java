@@ -37,30 +37,32 @@ public class UserInputDumper extends Thread
 	@Override
 	public void run()
 	{
-		while (running)
+		while(running)
 		{
 			try
 			{
 				String line;
-				while ((line = in.readLine()) != null && running)
+				while((line = in.readLine()) != null && running)
 				{
-					if (line.startsWith("/"))
+					if(line.startsWith("/"))
 					{
 						line = line.replaceFirst("/", "");
 						String[] ar = line.split(" ");
 						MyIRCBot.getCommandManager().executeCommand(ar[0], Arrays.copyOfRange(ar, 1, ar.length));
-					} else
+					}
+					else
 					{
-						if (line.startsWith("#"))
+						if(line.startsWith("#"))
 						{
-							if (con.getActiveChannel() == null)
+							if(con.getActiveChannel() == null)
 							{
 								continue;
 							}
 							con.getActiveChannel().sendRAWMessageToChannel(line.substring(1));
-						} else
+						}
+						else
 						{
-							if (con.getActiveChannel() == null)
+							if(con.getActiveChannel() == null)
 							{
 								continue;
 							}
@@ -68,7 +70,8 @@ public class UserInputDumper extends Thread
 						}
 					}
 				}
-			} catch (IOException e)
+			}
+			catch(IOException e)
 			{
 				MyIRCBot.logError(e);
 			}

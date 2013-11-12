@@ -30,7 +30,7 @@ public class IRCCommandManager
 
 	public void addCommand(IRCCommand cmd)
 	{
-		if (!this.commands.contains(cmd))
+		if(!this.commands.contains(cmd))
 		{
 			this.commands.add(cmd);
 		}
@@ -38,11 +38,11 @@ public class IRCCommandManager
 
 	public void executeCommand(String cmd, String[] args)
 	{
-		for (IRCCommand command : this.commands)
+		for(IRCCommand command : this.commands)
 		{
-			if (command.getName().equalsIgnoreCase(cmd) || command.getAliases().contains(cmd.toLowerCase()))
+			if(command.getName().equalsIgnoreCase(cmd) || command.getAliases().contains(cmd.toLowerCase()))
 			{
-				if (args.length < command.getArgs())
+				if(args.length < command.getArgs())
 				{
 					MyIRCBot.log(command.getUsage());
 					return;

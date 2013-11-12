@@ -33,7 +33,7 @@ public class ReloadCommand extends IRCCommand
 	@Override
 	public void execute(String[] args)
 	{
-		synchronized (MyIRCBot.getEventManager())
+		synchronized(MyIRCBot.getEventManager())
 		{
 			MyIRCBot.getEventManager().unregisterListeners();
 			MyIRCBot.getPluginLoader().disablePlugins();

@@ -32,7 +32,7 @@ public class IRCChannel
 
 	public IRCChannel(String name, IRCConnection con)
 	{
-		if (!name.startsWith("#"))
+		if(!name.startsWith("#"))
 		{
 			name = "#" + name;
 		}
@@ -64,7 +64,7 @@ public class IRCChannel
 	{
 		this.con.getOutput().addMessage(new IRCProtocol(Action.LEAVE, "", this.name));
 		this.con.getChannels().remove(this);
-		if (this.con.getActiveChannel().equals(this))
+		if(this.con.getActiveChannel().equals(this))
 		{
 			this.con.setActiveChannel(this.con.getChannels().size() != 0 ? this.con.getChannels().get(0) : null);
 		}
@@ -87,9 +87,9 @@ public class IRCChannel
 
 	public IRCClient getClient(String name)
 	{
-		for (IRCClient c : this.clients)
+		for(IRCClient c : this.clients)
 		{
-			if (c.getName().equalsIgnoreCase(name))
+			if(c.getName().equalsIgnoreCase(name))
 			{
 				return c;
 			}

@@ -62,7 +62,8 @@ public class MyIRCBot
 			con.joinChannel("Sinnoh");
 			MyIRCBot.ui = new UserInputDumper(con);
 			ui.start();
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			logError(e);
 		}
@@ -92,11 +93,12 @@ public class MyIRCBot
 		try
 		{
 			logfile = new File("myircbot.log");
-			if (!logfile.exists())
+			if(!logfile.exists())
 			{
 				logfile.createNewFile();
 			}
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			logError(e);
 		}
@@ -128,7 +130,8 @@ public class MyIRCBot
 		try
 		{
 			logwriter.close();
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			logError(e);
 		}
@@ -138,7 +141,7 @@ public class MyIRCBot
 
 	public static void log(String msg, Boolean debug)
 	{
-		if (debug && !MyIRCBot.debug)
+		if(debug && !MyIRCBot.debug)
 		{
 			return;
 		}
@@ -150,7 +153,8 @@ public class MyIRCBot
 			logwriter.write(sdf.format(new Date(System.currentTimeMillis())) + "  " + msg + "\n");
 			logwriter.flush();
 			logwriter.close();
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			logError(e);
 		}

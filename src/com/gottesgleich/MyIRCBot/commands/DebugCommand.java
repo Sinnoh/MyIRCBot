@@ -33,11 +33,12 @@ public class DebugCommand extends IRCCommand
 	@Override
 	public void execute(String[] args)
 	{
-		if (MyIRCBot.getDebug())
+		if(MyIRCBot.getDebug())
 		{
 			MyIRCBot.setDebug(false);
 			MyIRCBot.log("Disabled debug mode");
-		} else
+		}
+		else
 		{
 			MyIRCBot.setDebug(true);
 			MyIRCBot.log("Enabled debug mode");

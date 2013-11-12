@@ -34,7 +34,7 @@ public class IRCProtocol
 	{
 		this.value = val;
 		this.action = action;
-		if (!channel.startsWith("#"))
+		if(!channel.startsWith("#"))
 		{
 			channel = "#" + channel;
 		}

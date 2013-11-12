@@ -70,7 +70,8 @@ public class IRCConnection
 			this.in.start();
 			this.out = new IRCOutputSender(this, bw);
 			this.out.start();
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			MyIRCBot.logError(e);
 			this.connect();
@@ -96,7 +97,7 @@ public class IRCConnection
 
 	public void exit() throws IOException
 	{
-		for (int i = 0; i < this.channels.size(); i++)
+		for(int i = 0; i < this.channels.size(); i++)
 		{
 			this.channels.get(i).leave();
 		}
@@ -110,7 +111,7 @@ public class IRCConnection
 	public void setActiveChannel(IRCChannel ch)
 	{
 		this.activechannel = ch;
-		if (ch != null)
+		if(ch != null)
 		{
 			MyIRCBot.log("Your active channel has been set to " + ch.getName());
 		}
@@ -163,19 +164,20 @@ public class IRCConnection
 			Thread.sleep(time * 1000);
 			this.connect();
 			this.register();
-			for (IRCChannel c : channels)
+			for(IRCChannel c : channels)
 			{
 				this.joinChannel(c.getName());
 			}
-			for (IRCProtocol p : importants)
+			for(IRCProtocol p : importants)
 			{
 				this.out.addMessage(p, true);
 			}
-			for (IRCProtocol p : msgs)
+			for(IRCProtocol p : msgs)
 			{
 				this.out.addMessage(p);
 			}
-		} catch (Exception e)
+		}
+		catch(Exception e)
 		{
 			MyIRCBot.logError(e);
 		}
@@ -193,13 +195,13 @@ public class IRCConnection
 
 	public IRCChannel getChannel(String name)
 	{
-		if (!name.startsWith("#"))
+		if(!name.startsWith("#"))
 		{
 			name = "#" + name;
 		}
-		for (IRCChannel ch : this.channels)
+		for(IRCChannel ch : this.channels)
 		{
-			if (ch.getName().equalsIgnoreCase(name))
+			if(ch.getName().equalsIgnoreCase(name))
 			{
 				return ch;
 			}

@@ -39,7 +39,7 @@ public abstract class IRCCommand
 		this.usage = usage;
 		this.args = args;
 		this.aliases = new ArrayList<String>();
-		for (String alias : aliases)
+		for(String alias : aliases)
 		{
 			this.aliases.add(alias.toLowerCase());
 		}

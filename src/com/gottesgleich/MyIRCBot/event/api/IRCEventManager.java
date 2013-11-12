@@ -29,7 +29,7 @@ public class IRCEventManager
 
 	public void registerListener(IRCEventListener listener)
 	{
-		if (!this.listeners.contains(listener))
+		if(!this.listeners.contains(listener))
 		{
 			this.listeners.add(listener);
 		}
@@ -37,18 +37,19 @@ public class IRCEventManager
 
 	public void callEvent(IRCEvent event)
 	{
-		synchronized (listeners)
+		synchronized(listeners)
 		{
-			for (IRCEventListener listener : listeners)
+			for(IRCEventListener listener : listeners)
 			{
-				for (Method m : listener.getClass().getMethods())
+				for(Method m : listener.getClass().getMethods())
 				{
-					if (m.isAnnotationPresent(IRCEventHandler.class))
+					if(m.isAnnotationPresent(IRCEventHandler.class))
 					{
 						try
 						{
 							m.invoke(listener, event);
-						} catch (Exception e)
+						}
+						catch(Exception e)
 						{
 							continue;
 						}
