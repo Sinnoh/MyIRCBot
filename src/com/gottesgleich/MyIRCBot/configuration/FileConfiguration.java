@@ -7,162 +7,216 @@ import java.util.Properties;
 
 import com.gottesgleich.MyIRCBot.plugin.IRCPlugin;
 
-public class FileConfiguration {
+public class FileConfiguration
+{
 
 	private File file;
 	private Properties prop;
 
-	public FileConfiguration(File f) {
-		try {
+	public FileConfiguration(File f)
+	{
+		try
+		{
 			this.file = f;
 			this.prop = new Properties();
-			if (f.exists()) {
+			if (f.exists())
+			{
 				this.prop.load(new FileReader(this.file));
 			}
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	public void addDefaults(String path, String value) {
-		if (this.prop.getProperty(path) == null) {
+	public void addDefaults(String path, String value)
+	{
+		if (this.prop.getProperty(path) == null)
+		{
 			this.prop.put(path, value);
 		}
 	}
 
-	public void addDefaults(String path, Integer value) {
-		if (this.prop.getProperty(path) == null) {
+	public void addDefaults(String path, Integer value)
+	{
+		if (this.prop.getProperty(path) == null)
+		{
 			this.prop.put(path, String.valueOf(value));
 		}
 	}
 
-	public void addDefaults(String path, Double value) {
-		if (this.prop.getProperty(path) == null) {
+	public void addDefaults(String path, Double value)
+	{
+		if (this.prop.getProperty(path) == null)
+		{
 			this.prop.put(path, String.valueOf(value));
 		}
 	}
 
-	public void addDefaults(String path, Long value) {
-		if (this.prop.getProperty(path) == null) {
+	public void addDefaults(String path, Long value)
+	{
+		if (this.prop.getProperty(path) == null)
+		{
 			this.prop.put(path, String.valueOf(value));
 		}
 	}
 
-	public void addDefaults(String path, Boolean value) {
-		if (this.prop.getProperty(path) == null) {
+	public void addDefaults(String path, Boolean value)
+	{
+		if (this.prop.getProperty(path) == null)
+		{
 			this.prop.put(path, String.valueOf(value));
 		}
 	}
 
-	public void save(IRCPlugin p) {
-		try {
-			if (!this.file.exists()) {
+	public void save(IRCPlugin p)
+	{
+		try
+		{
+			if (!this.file.exists())
+			{
 				this.file.getParentFile().mkdirs();
 				this.file.createNewFile();
 			}
 			FileWriter fw = new FileWriter(this.file);
 			this.prop.store(fw, p.getName());
 			fw.close();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	public void save(String name) {
-		try {
-			if (!this.file.exists()) {
+	public void save(String name)
+	{
+		try
+		{
+			if (!this.file.exists())
+			{
 				// this.file.getParentFile().mkdirs();
 				this.file.createNewFile();
 			}
 			FileWriter fw = new FileWriter(this.file);
 			this.prop.store(fw, name);
 			fw.close();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	public void set(String path, String value) {
+	public void set(String path, String value)
+	{
 		this.prop.put(path, String.valueOf(value));
 	}
 
-	public void set(String path, Integer value) {
+	public void set(String path, Integer value)
+	{
 		this.prop.put(path, String.valueOf(value));
 	}
 
-	public void set(String path, Double value) {
+	public void set(String path, Double value)
+	{
 		this.prop.put(path, String.valueOf(value));
 	}
 
-	public void set(String path, Long value) {
+	public void set(String path, Long value)
+	{
 		this.prop.put(path, String.valueOf(value));
 	}
 
-	public void set(String path, Boolean value) {
+	public void set(String path, Boolean value)
+	{
 		this.prop.put(path, String.valueOf(value));
 	}
 
-	public String getString(String path) {
-		if (this.prop.getProperty(path) == null) {
+	public String getString(String path)
+	{
+		if (this.prop.getProperty(path) == null)
+		{
 			return null;
-		} else {
+		} else
+		{
 			return this.prop.getProperty(path);
 		}
 	}
 
-	public Integer getInt(String path) {
-		if (this.prop.getProperty(path) == null) {
+	public Integer getInt(String path)
+	{
+		if (this.prop.getProperty(path) == null)
+		{
 			return null;
-		} else {
-			try {
+		} else
+		{
+			try
+			{
 				return Integer.valueOf(this.prop.getProperty(path));
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				return null;
 			}
 		}
 	}
 
-	public Double getDouble(String path) {
-		if (this.prop.getProperty(path) == null) {
+	public Double getDouble(String path)
+	{
+		if (this.prop.getProperty(path) == null)
+		{
 			return null;
-		} else {
-			try {
+		} else
+		{
+			try
+			{
 				return Double.valueOf(this.prop.getProperty(path));
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				return null;
 			}
 		}
 	}
 
-	public Long getLong(String path) {
-		if (this.prop.getProperty(path) == null) {
+	public Long getLong(String path)
+	{
+		if (this.prop.getProperty(path) == null)
+		{
 			return null;
-		} else {
-			try {
+		} else
+		{
+			try
+			{
 				return Long.valueOf(this.prop.getProperty(path));
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				return null;
 			}
 		}
 	}
 
-	public Boolean getBoolean(String path) {
-		if (this.prop.getProperty(path) == null) {
+	public Boolean getBoolean(String path)
+	{
+		if (this.prop.getProperty(path) == null)
+		{
 			return null;
-		} else {
-			try {
+		} else
+		{
+			try
+			{
 				return Boolean.valueOf(this.prop.getProperty(path));
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				return null;
 			}
 		}
 	}
 
-	public void reloadConfig() {
-		try {
+	public void reloadConfig()
+	{
+		try
+		{
 			this.prop = new Properties();
 			this.prop.load(new FileReader(this.file));
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}

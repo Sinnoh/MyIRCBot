@@ -5,7 +5,8 @@ import java.util.List;
 
 import com.gottesgleich.MyIRCBot.IRCConnection;
 
-public abstract class IRCCommand {
+public abstract class IRCCommand
+{
 
 	private String name;
 	private String usage;
@@ -13,35 +14,41 @@ public abstract class IRCCommand {
 	private List<String> aliases;
 	private IRCConnection con;
 
-	public IRCCommand(IRCConnection con, String name, String usage, int args,
-			String... aliases) {
+	public IRCCommand(IRCConnection con, String name, String usage, int args, String... aliases)
+	{
 		this.con = con;
 		this.name = name;
 		this.usage = usage;
 		this.args = args;
 		this.aliases = new ArrayList<String>();
-		for (String alias : aliases) {
+		for (String alias : aliases)
+		{
 			this.aliases.add(alias.toLowerCase());
 		}
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return this.name;
 	}
 
-	public String getUsage() {
+	public String getUsage()
+	{
 		return this.usage;
 	}
 
-	public int getArgs() {
+	public int getArgs()
+	{
 		return this.args;
 	}
 
-	public List<String> getAliases() {
+	public List<String> getAliases()
+	{
 		return this.aliases;
 	}
 
-	public IRCConnection getConnection() {
+	public IRCConnection getConnection()
+	{
 		return this.con;
 	}
 
