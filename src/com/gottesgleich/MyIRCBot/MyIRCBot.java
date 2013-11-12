@@ -1,21 +1,8 @@
 package com.gottesgleich.MyIRCBot;
 
-
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-
-
-
-
-
-
-
-
-
-
-
 
 import com.gottesgleich.MyIRCBot.commands.DebugCommand;
 import com.gottesgleich.MyIRCBot.commands.JoinCommand;
@@ -26,10 +13,7 @@ import com.gottesgleich.MyIRCBot.configuration.FileConfiguration;
 import com.gottesgleich.MyIRCBot.event.api.IRCEventManager;
 import com.gottesgleich.MyIRCBot.plugin.PluginLoader;
 
-
-
-public class MyIRCBot 
-{
+public class MyIRCBot {
 	private static String version = "1.1";
 	private static IRCEventManager eventmng;
 	private static PluginLoader pluginloader;
@@ -39,41 +23,39 @@ public class MyIRCBot
 	private static FileWriter logwriter;
 	private static IRCCommandManager cmdmanager;
 	private static UserInputDumper ui;
-	
-	public static void main(String[] args) throws IOException
-	{
-        try 
-        {
-        	setUpLogFile();
-        	loadConfig();
-        	debug = config.getBoolean("debug");
-        	pluginloader = new PluginLoader();
-        	eventmng = new IRCEventManager();
-        	pluginloader.loadPlugins();
-        	pluginloader.enablePlugins();
-    		MyIRCBot.log("Starting MyIRCBot v." + version);
-			IRCConnection con = new IRCConnection(config.getString("host"), config.getString("nick"), config.getInt("port"));
+
+	public static void main(String[] args) throws IOException {
+		try {
+			setUpLogFile();
+			loadConfig();
+			debug = config.getBoolean("debug");
+			pluginloader = new PluginLoader();
+			eventmng = new IRCEventManager();
+			pluginloader.loadPlugins();
+			pluginloader.enablePlugins();
+			MyIRCBot.log("Starting MyIRCBot v." + version);
+			IRCConnection con = new IRCConnection(config.getString("host"),
+					config.getString("nick"), config.getInt("port"));
 			setupCommands(con);
 			con.joinChannel("Sinnoh");
 			MyIRCBot.ui = new UserInputDumper(con);
 			ui.start();
-		}catch (Exception e) 
-		{	
+		} catch (Exception e) {
 			logError(e);
 		}
 	}
-	
-	public static void setupCommands(IRCConnection con)
-	{
+
+	public static void setupCommands(IRCConnection con) {
 		cmdmanager = new IRCCommandManager();
 		cmdmanager.addCommand(new DebugCommand(con, "debug", "/debug", 0));
-		cmdmanager.addCommand(new JoinCommand(con, "join", "/join <Channel>", 1, "j"));
+		cmdmanager.addCommand(new JoinCommand(con, "join", "/join <Channel>",
+				1, "j"));
 		cmdmanager.addCommand(new ReloadCommand(con, "reload", "/reload", 0));
-		cmdmanager.addCommand(new StopCommand(con, "stop", "/stop", 0, "exit", "quit"));
+		cmdmanager.addCommand(new StopCommand(con, "stop", "/stop", 0, "exit",
+				"quit"));
 	}
-	
-	private static void loadConfig()
-	{
+
+	private static void loadConfig() {
 		config = new FileConfiguration(new File("config.properties"));
 		config.addDefaults("host", "portlane.se.quakenet.org");
 		config.addDefaults("nick", "GBot");
@@ -81,97 +63,76 @@ public class MyIRCBot
 		config.addDefaults("debug", false);
 		config.save("MyIRCBot v." + version + " by Sinnoh");
 	}
-	
-	private static void setUpLogFile()
-	{
-		try
-		{
+
+	private static void setUpLogFile() {
+		try {
 			logfile = new File("myircbot.log");
-			if(!logfile.exists())
-			{
+			if (!logfile.exists()) {
 				logfile.createNewFile();
 			}
-		}catch(Exception e)
-		{
+		} catch (Exception e) {
 			logError(e);
 		}
-		
+
 	}
-	
-	public static IRCEventManager getEventManager()
-	{
+
+	public static IRCEventManager getEventManager() {
 		return MyIRCBot.eventmng;
 	}
-	
-	public static IRCCommandManager getCommandManager()
-	{
+
+	public static IRCCommandManager getCommandManager() {
 		return MyIRCBot.cmdmanager;
 	}
-	
-	public static PluginLoader getPluginLoader()
-	{
+
+	public static PluginLoader getPluginLoader() {
 		return MyIRCBot.pluginloader;
 	}
-	
-	public static FileConfiguration getConfig()
-	{
+
+	public static FileConfiguration getConfig() {
 		return config;
 	}
-	
-	public static void exit()
-	{
-		try
-		{
+
+	public static void exit() {
+		try {
 			logwriter.close();
-		}catch(Exception e)
-		{
+		} catch (Exception e) {
 			logError(e);
 		}
 		ui.setRunning(false);
 		System.exit(0);
 	}
-	
-	public static void log(String msg, Boolean debug)
-	{	
-		if(debug && !MyIRCBot.debug)
-		{
+
+	public static void log(String msg, Boolean debug) {
+		if (debug && !MyIRCBot.debug) {
 			return;
 		}
 		System.out.println("> " + msg);
-		try
-		{
+		try {
 			logwriter = new FileWriter(logfile, true);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss");
-			logwriter.write(sdf.format(new Date(System.currentTimeMillis())) + "  " + msg + "\n");
+			logwriter.write(sdf.format(new Date(System.currentTimeMillis()))
+					+ "  " + msg + "\n");
 			logwriter.flush();
 			logwriter.close();
-		}catch(Exception e)
-		{
+		} catch (Exception e) {
 			logError(e);
 		}
 	}
-	
-	public static void log(String msg)
-	{
+
+	public static void log(String msg) {
 		log(msg, false);
 	}
-	
-	public static void logError(Exception e)
-	{
+
+	public static void logError(Exception e) {
 		log(e.getMessage());
 		e.printStackTrace();
 	}
-	
-	public static boolean getDebug()
-	{
+
+	public static boolean getDebug() {
 		return debug;
 	}
-	
-	public static void setDebug(boolean b)
-	{
+
+	public static void setDebug(boolean b) {
 		debug = b;
 	}
 }
-
-
-
