@@ -25,6 +25,7 @@ public class IRCConnection
 	  private Boolean isConnected = false;
 	  private List<IRCChannel> channels = new ArrayList<IRCChannel>();
 	  private IRCChannel activechannel = null;
+	  private int test;
 	  
 	  public IRCConnection(String host, String user) throws UnknownHostException, IOException
 	  {
