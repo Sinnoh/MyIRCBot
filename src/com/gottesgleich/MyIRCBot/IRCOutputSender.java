@@ -1,3 +1,21 @@
+/**
+Copyright 2013 Philipp Rissle
+
+This file is part of MyIRCBot.
+
+MyIRCBot is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+MyIRCBot is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with MyIRCBot.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.gottesgleich.MyIRCBot;
 
 import java.io.BufferedWriter;
@@ -9,8 +27,8 @@ public class IRCOutputSender extends Thread
 	private IRCConnection con;
 	private BufferedWriter bw;
 	public Boolean running = true;
-	private List<IrcProtocol> msgs = new ArrayList<IrcProtocol>();
-	private List<IrcProtocol> important = new ArrayList<IrcProtocol>();
+	private List<IRCProtocol> msgs = new ArrayList<IRCProtocol>();
+	private List<IRCProtocol> important = new ArrayList<IRCProtocol>();
 	private Long nextping;
 
 	public IRCOutputSender(IRCConnection con, BufferedWriter bw)
@@ -20,12 +38,12 @@ public class IRCOutputSender extends Thread
 		this.nextping = System.currentTimeMillis() + 10000;
 	}
 
-	public List<IrcProtocol> getImportants()
+	public List<IRCProtocol> getImportants()
 	{
 		return this.important;
 	}
 
-	public List<IrcProtocol> getMSGS()
+	public List<IRCProtocol> getMSGS()
 	{
 		return this.msgs;
 	}
@@ -49,7 +67,7 @@ public class IRCOutputSender extends Thread
 				}
 				if (this.important.size() != 0)
 				{
-					IrcProtocol p = this.important.get(0);
+					IRCProtocol p = this.important.get(0);
 					this.bw.write(p.parse());
 					this.bw.flush();
 					MyIRCBot.log("OUT: " + p.parse().replace("\r", ""), true);
@@ -62,7 +80,7 @@ public class IRCOutputSender extends Thread
 						{
 							continue;
 						}
-						IrcProtocol p = this.msgs.get(0);
+						IRCProtocol p = this.msgs.get(0);
 						this.bw.write(p.parse());
 						this.bw.flush();
 						MyIRCBot.log("OUT: " + p.parse().replace("\r", ""), true);
@@ -77,12 +95,12 @@ public class IRCOutputSender extends Thread
 		}
 	}
 
-	public void addMessage(IrcProtocol pro)
+	public void addMessage(IRCProtocol pro)
 	{
 		this.addMessage(pro, false);
 	}
 
-	public void addMessage(IrcProtocol pro, Boolean b)
+	public void addMessage(IRCProtocol pro, Boolean b)
 	{
 		if (b)
 		{

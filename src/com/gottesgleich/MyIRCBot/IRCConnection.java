@@ -1,3 +1,21 @@
+/**
+Copyright 2013 Philipp Rissle
+
+This file is part of MyIRCBot.
+
+MyIRCBot is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+MyIRCBot is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with MyIRCBot.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.gottesgleich.MyIRCBot;
 
 import java.io.BufferedReader;
@@ -10,7 +28,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gottesgleich.MyIRCBot.IrcProtocol.Action;
+import com.gottesgleich.MyIRCBot.IRCProtocol.Action;
 
 public class IRCConnection
 {
@@ -62,13 +80,13 @@ public class IRCConnection
 	private void register() throws IOException
 	{
 		MyIRCBot.log("Logging onto the server as " + this.username);
-		this.out.addMessage(new IrcProtocol(Action.RAW, "NICK " + this.username + "\n\r", ""), true);
-		this.out.addMessage(new IrcProtocol(Action.RAW, "USER " + this.username + " localhost " + this.host + ": " + this.username + "\n\r", ""), true);
+		this.out.addMessage(new IRCProtocol(Action.RAW, "NICK " + this.username + "\n\r", ""), true);
+		this.out.addMessage(new IRCProtocol(Action.RAW, "USER " + this.username + " localhost " + this.host + ": " + this.username + "\n\r", ""), true);
 	}
 
 	public void joinChannel(String cname)
 	{
-		this.out.addMessage(new IrcProtocol(Action.JOIN, "", cname));
+		this.out.addMessage(new IRCProtocol(Action.JOIN, "", cname));
 	}
 
 	public boolean isInChannel()
@@ -132,8 +150,8 @@ public class IRCConnection
 	{
 		try
 		{
-			List<IrcProtocol> importants = this.out.getImportants();
-			List<IrcProtocol> msgs = this.out.getMSGS();
+			List<IRCProtocol> importants = this.out.getImportants();
+			List<IRCProtocol> msgs = this.out.getMSGS();
 			this.out.setRunning(false);
 			this.in.setRunning(false);
 			this.br.close();
@@ -149,11 +167,11 @@ public class IRCConnection
 			{
 				this.joinChannel(c.getName());
 			}
-			for (IrcProtocol p : importants)
+			for (IRCProtocol p : importants)
 			{
 				this.out.addMessage(p, true);
 			}
-			for (IrcProtocol p : msgs)
+			for (IRCProtocol p : msgs)
 			{
 				this.out.addMessage(p);
 			}
